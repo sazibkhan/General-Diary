@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<title>SineUP Pulish</title>
+ <link href="css/signUp.css" rel="stylesheet"  type="text/css"/>
+</h:head>
+
+<h:body>
+<!-- 
+<div class="partOfHeader">
+<p:panel>
+<div class="menu1">
+		<ul><li><a href="${request.contextPath}/login.xhtml">Login</a></li></ul>
+</div>
+</p:panel>
+</div> -->
+
+
+<p:panel>
+
+<div class="partOfMiddle">
+<h2 style="text-align: center; font-family: sans-serif;">Welcome To SignUp Form</h2>
+<p:growl></p:growl>
+
+<h:form >
+
+<center><p:panelGrid columns="2">
+
+<p:outputLabel value="Full Name"></p:outputLabel>
+<p:inputText value="#{signupController.usersDTO.nickName}"/>
+
+<p:outputLabel value="User Name"></p:outputLabel>
+<p:inputText value="#{signupController.usersDTO.username}"/>
+
+
+<p:outputLabel for="pass" value="Password"/>
+<p:password id="pass" value="#{signupController.usersDTO.password}"  required="true" label="Password" feedback="true" requiredMessage="Password Must not be blanked"></p:password>
+
+<p:outputLabel value="Mobile No"></p:outputLabel>
+<p:inputText value="#{signupController.usersDTO.mobileNo}"></p:inputText>
+
+</p:panelGrid></center>
+
+<p:panelGrid columns="2" style="margin-left:40%; margin-top:1%">
+<center>
+<f:facet name="header">
+For Only Administration Persons
+</f:facet>
+<p:selectOneMenu value="#{signupController.usersDTO.thanaName}" filter="true">
+<f:selectItems value="#{thanaController.thanaDTOList}" var="thana" itemLabel="#{thana.thana}" itemValue="#{thana.thana}"/>
+
+</p:selectOneMenu>
+<p:outputLabel value="OC Identification ID: "/>
+<p:inputText value="#{signupController.usersDTO.ocIdentificationId}"/>
+</center>
+</p:panelGrid>
+
+
+<center>
+<p:commandButton value="Save" icon="fa fa-sign-in" action="#{signupController.saveOrUpdate}" style="margin-top:30px; margin-left: 40px;" />
+</center>
+
+</h:form>
+
+</div>
+
+
+
+</p:panel>
+
+
+
+
+<p:panel>
+<div class="footer">
+
+@2018 GD Project Of Bangladesh | All Rights Reserved
+
+</div>
+</p:panel>
+
+</h:body>
+</html>

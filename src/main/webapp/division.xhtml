@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+<ui:define name="content">      
+<h:body>
+
+<p:panel>
+<center><h2>Welcome To Division Form</h2></center>
+</p:panel>
+<h:form id="divFrom">
+
+<!-- <p:growl/> -->
+<center>
+<p:panel>
+<p:panelGrid columns="2">
+
+<p:outputLabel value="Country"/>
+<p:selectOneMenu value="#{divisionController.divDTO.country.countryID}">
+<f:selectItems value="#{countryController.countryDTOList}" var="country" itemLabel="#{country.country}" itemValue="#{country.countryID}"/>
+</p:selectOneMenu>
+
+<p:outputLabel value="Division"/>
+<p:inputText value="#{divisionController.divDTO.division}"/>
+        
+</p:panelGrid>
+<p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{divisionController.saveOrUpdateDivision}" update="divFrom"/>
+</p:panel>
+</center>
+
+
+<p:dataTable value="#{divisionController.divDTOList}" var="divi">
+
+<p:column headerText="Division Id">
+<p:outputLabel value="#{divi.divisionID}"/>
+</p:column>
+
+<p:column headerText="Division Name">
+<p:outputLabel value="#{divi.division}"/>
+</p:column>
+
+
+<p:column headerText="Action">
+<p:commandButton  value="Edit"/>
+<p:commandButton  value="Delete"/>
+</p:column>
+
+</p:dataTable>
+
+
+</h:form>
+</h:body>      
+</ui:define>
+</ui:composition>

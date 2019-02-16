@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+<ui:define name="content">      
+<h:body>
+
+<p:panel>
+<center><h2>Welcome To District Form</h2></center>
+</p:panel>
+<h:form id="districtFrom">
+
+<!-- <p:growl/> -->
+<center>
+<p:panel>
+<p:panelGrid columns="2">
+
+<p:outputLabel value="Division"/>
+<p:selectOneMenu value="#{districtController.districtDTO.divisionEntite.divisionID}">										<!-- divisionName -->
+<f:selectItems value="#{divisionController.divDTOList}" var="division" itemLabel="#{division.division}" itemValue="#{division.divisionID}"/>
+</p:selectOneMenu>
+
+<p:outputLabel value="District Name"/>
+<p:inputText value="#{districtController.districtDTO.district}"/>
+        
+</p:panelGrid>
+<p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{districtController.saveOrUpdate}" update="districtFrom"/>
+</p:panel>
+</center>
+
+<p:dataTable value="#{districtController.districtDTOList}" var="district">
+
+<p:column headerText="District Id">
+<p:outputLabel value="#{district.districtID}"/>
+</p:column>
+
+<p:column headerText="District Name">
+<p:outputLabel value="#{district.district}"/>
+</p:column>
+
+
+<p:column headerText="Action">
+<p:commandButton  value="Edit"/>
+<p:commandButton  value="Delete"/>
+</p:column>
+
+</p:dataTable>
+</h:form>
+</h:body>      
+</ui:define>
+</ui:composition>

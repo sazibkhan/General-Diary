@@ -1,0 +1,58 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+      
+<ui:define name="content">   
+
+     
+<h:body>
+<p:panel>
+<center><h2>Welcome To Thana Form</h2></center>
+</p:panel>
+<h:form id="thanaFrom">
+
+<!-- <p:growl/> -->
+<center>
+<p:panel>
+<p:panelGrid columns="2">
+
+<p:outputLabel value="District"/>
+<p:selectOneMenu value="#{thanaController.thanaDTO.districtEntity.districtID}">										<!-- divisionName -->
+<f:selectItems value="#{districtController.districtDTOList}" var="district" itemLabel="#{district.district}" itemValue="#{district.districtID}"/>
+</p:selectOneMenu>
+
+<p:outputLabel value="Thana Name"/>
+<p:inputText value="#{thanaController.thanaDTO.thana}"/>
+        
+</p:panelGrid>
+<p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{thanaController.saveOrUpdate}" update="thanaFrom"/>
+</p:panel>
+
+
+<p:dataTable value="#{thanaController.thanaDTOList}" var="tha">
+
+<p:column headerText="thana Id">
+<p:outputLabel value="#{tha.thanaId}"/>
+</p:column>
+
+<p:column headerText="thana Name">
+<p:outputLabel value="#{tha.thana}"/>
+</p:column>
+
+<p:column headerText="Action">
+<p:commandButton  value="Edit"/>
+<p:commandButton  value="Delete"/>
+</p:column>
+</p:dataTable>
+
+
+
+</center>
+</h:form>
+</h:body>      
+</ui:define>
+</ui:composition>

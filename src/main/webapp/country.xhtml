@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+      
+<ui:define name="content">   
+<h:body>
+
+<p:panel>
+<center><h2 style="color: red">Welcome To Country Form</h2></center>
+</p:panel>
+<h:form id="countryFrom">
+
+<!-- <p:growl/> -->
+<center>
+<p:panel>
+<p:panelGrid columns="2">
+
+<p:outputLabel value="Country Name"/>
+<p:inputText value="#{countryController.countryDTO.country}"/>
+        
+</p:panelGrid>
+<p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{countryController.saveCountry}" update="countryFrom"/>
+</p:panel>
+
+
+
+
+<p:dataTable value="#{countryController.countryDTOList}" var="country">
+
+<p:column headerText="CountryID" >
+<p:outputLabel value="#{country.countryID}"/>
+</p:column>
+
+<p:column headerText="Country" filterBy="country">
+<p:outputLabel value="#{country.country}"/>
+</p:column>
+
+<p:column headerText="Action">
+<p:commandButton value="Edit" icon="fa-fa-edit" action="#{countryController.findCountryById}" update="countryFrom">
+<f:setPropertyActionListener value="#{country}" target="#{countryController.countryDTO}" />
+</p:commandButton>
+<p:commandButton value="Delete" icon="fa-fa-trash" action="#{countryController.countryDelete}" />
+</p:column>
+
+
+ 
+
+
+
+
+</p:dataTable>
+
+</center>
+</h:form>
+</h:body> 
+</ui:define>       
+</ui:composition>

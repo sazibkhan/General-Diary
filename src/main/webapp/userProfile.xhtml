@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+<ui:define name="content">      
+<h:body>
+
+<h1>User Profile </h1>
+<h:form id="userInputFrom" enctype="multipart/form-data">
+<center>
+	<p:panelGrid columns="2">
+	
+	 <p:outputLabel  value="User Photo"/>
+	 <p:fileUpload value="#{profileController.uploadFile}" mode="simple" update="userInputFrom" /> 
+        	 
+         
+	
+	<p:outputLabel  value="User Name"/>
+	<p:inputText value="#{profileController.profileDTO.profileName}"/>
+
+	<p:outputLabel  value="phone"/>
+	<p:inputText value="#{profileController.profileDTO.phone}"/>
+	
+	<p:outputLabel  value="User Email"/>
+	<p:inputText value="#{profileController.profileDTO.email}"/>
+	
+	
+	<p:outputLabel  value="Religious"/>
+	<p:inputText value="#{profileController.profileDTO.religious}"/>
+	
+
+</p:panelGrid>
+ <p:commandButton value="Save" action="#{profileController.saveOrUpdateUserProfile}" update="userInputFrom" ajax="false"/>
+
+
+</center>
+
+
+
+
+</h:form>
+
+</h:body>
+</ui:define>
+</ui:composition>

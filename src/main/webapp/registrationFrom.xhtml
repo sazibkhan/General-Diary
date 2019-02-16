@@ -1,0 +1,90 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+<ui:define name="content">     
+      
+<h:body>
+
+<p:panel>
+<center><h2>Welcome To Registration Form</h2></center>
+<p:commandButton style="float:right"  value="Login"/>
+<p:commandButton style="float:right"  value="Logout"/>
+</p:panel>
+
+
+<h:form id="signUpFrom">
+
+<!-- <p:growl/> -->
+
+<center>
+
+<p:panel>
+<p:panelGrid columns="2">
+
+<p:outputLabel value="User Name"/>
+<p:inputText value="#{regController.regDTO.userName}"/>
+
+
+<p:outputLabel value="Password"/>
+<p:inputText value="#{regController.regDTO.password}"/>
+
+<p:outputLabel value="Conform Password"/>
+<p:inputText value="#{regController.regDTO.conformPassword}"/>
+
+<p:outputLabel value="Email"/>
+<p:inputText value="#{regController.regDTO.email}"/>
+
+ 
+</p:panelGrid>
+<p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{regController.saveOrUpdateUser}" update="signUpFrom"/>
+</p:panel>
+
+<p:panel>
+<p:dataTable value="#{regController.regDTOList}" var="reg">
+
+<!-- <p:column headerText="Reagistation ID" filterBy="#{reg.reagistationID}">
+<p:outputLabel  value="#{reg.reagistationID}" />
+</p:column> -->
+
+<p:column headerText="Name" filterBy="#{reg.userName}">
+<p:outputLabel  value="#{reg.userName}" />
+</p:column>
+
+<p:column headerText="Password">
+<p:outputLabel  value="#{reg.password}"/>
+</p:column>
+
+<p:column headerText="Conform Password">
+<p:outputLabel  value="#{reg.conformPassword}"/>
+</p:column>
+
+<p:column headerText="Email">
+<p:outputLabel  value="#{reg.email}"/>
+</p:column>
+
+
+<p:column headerText="Action">
+<p:commandButton value="Edit" icon="fa-fa-fa" action="#{regController.findRegById}"
+update="signUpFrom">
+<f:setPropertyActionListener value="#{reg}" target="#{regController.regDTO}"  />
+</p:commandButton>
+<p:commandButton value="Delete/" icon="fa-fa-fa"  action="#{regController.deleteReg}" update="signUpFrom">
+<f:setPropertyActionListener value="#{reg}" target="#{regController.regDTO}"  />
+</p:commandButton>
+
+</p:column>
+</p:dataTable>
+</p:panel>
+
+<p:commandButton value="Download" ajax="false" icon="fa fa-download" action="#{regController.downloadRagList}" />
+</center>
+</h:form>
+
+
+</h:body>    
+</ui:define>
+</ui:composition>  

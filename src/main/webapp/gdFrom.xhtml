@@ -1,0 +1,121 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+      
+<ui:define name="content">   
+
+<h:body>
+<h:form id="GdFrom">
+<p:growl/>
+
+<center>
+<p:panel>
+<center><h2 style="color: red">Welcome To GD Form</h2></center>
+
+</p:panel>
+<p:panel>
+<p:panelGrid columns="2">
+       
+<p:outputLabel value="Subject"  />
+ <p:inputTextarea value="#{gdController.gdDTO.gdSubject}" rows="3" cols="33" />
+
+<p:outputLabel value="NID Number" />
+<p:inputText value="#{gdController.gdDTO.nidNumber}"/>
+
+<p:outputLabel value="User Name"/>
+<p:inputText value="#{gdController.gdDTO.userName}"/>
+
+<p:outputLabel value="Father Name" />
+<p:inputText value="#{gdController.gdDTO.fatherName}"/>
+
+<p:outputLabel value="Mother Name"/>
+<p:inputText value="#{gdController.gdDTO.motherName}"/>
+
+<p:outputLabel value="Emai"/>
+<p:inputText value="#{gdController.gdDTO.email}"/>
+
+<p:outputLabel value="Phone"/>
+<p:inputText value="#{gdController.gdDTO.phone}"/>
+
+<p:outputLabel for="Gender" value="Gender:" />
+        <p:selectOneRadio id="Gender" value="#{gdController.gdDTO.gender}">
+            <f:selectItem itemLabel="Male" itemValue="Male" />
+            <f:selectItem itemLabel="Female" itemValue="Female" />
+        </p:selectOneRadio>
+
+
+<p:outputLabel value="Country"/>
+<p:selectOneMenu value="#{gdController.gdDTO.countryEntity.countryID}">
+<f:selectItem itemLabel="Select Country" />
+<f:selectItems value="#{countryController.countryDTOList}" var="country" itemLabel="#{country.country}" itemValue="#{country.countryID}"/>
+<p:ajax event="change" listener="#{gdController.findAllDivisionByCountryId}" update="divList"/>
+
+</p:selectOneMenu>
+
+
+<p:outputLabel value="Division"/>
+<p:selectOneMenu value="#{gdController.gdDTO.divisionEntity.divisionID}" id="divList">	
+<f:selectItem itemLabel="Select Division" />									<!-- divisionName -->
+<f:selectItems value="#{gdController.divisionList}" var="division" itemLabel="#{division.division}" itemValue="#{division.divisionID}"/>
+<p:ajax event="change" listener="#{gdController.findAllDistrictByDivisionId}" update="disList"/>
+</p:selectOneMenu>
+
+<p:outputLabel value="District" />
+<p:selectOneMenu value="#{gdController.gdDTO.districtEntity.districtID}" id="disList">
+<f:selectItem itemLabel="Select District" />									
+<f:selectItems value="#{gdController.distictList}" var="dis" itemLabel="#{dis.district}" itemValue="#{dis.districtID}"/>
+<p:ajax event="change" listener="#{gdController.findAllThanaByDistrictId}" update="thana"/>
+
+</p:selectOneMenu>
+
+<p:outputLabel value="Thana"/>
+<p:selectOneMenu value="#{gdController.gdDTO.thanaEntity.thanaId}" id="thana">
+<f:selectItem itemLabel="Select Thana" />
+      <f:selectItems value="#{gdController.thanaList}" var="thana" itemLabel="#{thana.thana}" itemValue="#{thana.thanaId}"/>
+      
+</p:selectOneMenu>
+
+
+
+
+
+</p:panelGrid>
+<p:panelGrid>
+
+<h3  style="margin-top: 10">
+I would like to request you for make a G.D on police station.</h3>
+    <p style="color: red">How was looks of the lost product. Give a brief description.</p>
+    <p:inputTextarea rows="8" cols="50" value="#{gdController.gdDTO.productDescription}" queryDelay="750" minQueryLength="4" />
+ 
+
+<h3 style="margin-top: 0">AutoComplete</h3>
+    <p>When,where nd how the things have been lost?</p>
+    <p:inputTextarea rows="8" cols="50" value="#{gdController.gdDTO.locationDescription}" queryDelay="750" minQueryLength="4" />
+
+</p:panelGrid>
+
+<p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{gdController.gdSaveOrUpdate}" update="GdFrom"/>
+</p:panel>
+</center>
+
+
+</h:form>
+<h:form>
+<p:panel>
+<p>How was  looks of the lost product.  Give a brief description.</p>
+<p>I would like to request you for make a G.D on police station.</p>
+<p>When,where nd how the things have been lost?</p>
+
+</p:panel>
+
+</h:form>
+
+
+
+</h:body>
+</ui:define>
+</ui:composition>

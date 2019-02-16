@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/template/template.xhtml">
+
+      
+   <ui:define name="content">
+
+      
+      <h:head>      
+     <title>Home</title> 
+      </h:head>
+<h:body>
+
+
+<h:form id="studentFrm">
+
+<p:growl/>
+
+<p:panel>
+
+<p:dataTable value="#{signupController.usersList}" var="user">
+<p:column headerText="Name" filterBy="#{user.nickName}">
+<p:outputLabel value="#{user.nickName}"/>
+</p:column>
+
+<p:column headerText="User Name">
+<p:outputLabel value="#{user.nickName}"/>
+</p:column>
+
+<p:column headerText="Role">
+
+<p:selectManyMenu value="#{signupController.usersDTO.roleName}">
+
+</p:selectManyMenu>
+
+</p:column>
+<p:column headerText="Action">
+<p:commandButton icon="fa fa-edit" action="#{studentController. findStudentById}" update="studentFrm">
+<f:setPropertyActionListener value="#{student}" target="#{studentController.studentDTO}"/>
+</p:commandButton>
+<p:commandButton icon="fa fa-trash" action="#{studentController.deleteStudent}" update="studentFrm">
+<f:setPropertyActionListener value="#{student}" target="#{studentController.studentDTO}"/>
+</p:commandButton>
+</p:column>
+
+</p:dataTable>
+</p:panel>
+
+
+
+
+</h:form>
+
+
+</h:body>
+</ui:define>
+</ui:composition>

@@ -1,0 +1,156 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+      
+<ui:define name="content">  
+<p:panel>
+<p:outputLabel value="User Name  :-" style="color: red"  />
+#{username}
+<p:outputLabel value="Thana Name:-" style="color : red" />
+#{thanaName}
+</p:panel> 
+<h:body>
+
+<h:form id="GdFrom">
+
+<p:dataTable value="#{gdController.thahaWiseGdDtoList}" var="passport">
+
+<!-- <p:column headerText="PassportID" >
+<p:outputLabel value="#{passport.gdID}"/>
+</p:column> -->
+
+<p:column headerText="Subject">
+<p:outputLabel value="#{passport.gdSubject}"/>
+</p:column>
+
+<!-- <p:column headerText="Nid Number">
+<p:outputLabel value="#{passport.nidNumber}"/>
+</p:column> -->
+
+<!-- <p:column headerText="User Name" filterBy="#{passport.userName}">
+<p:outputLabel value="#{passport.userName}"/>
+</p:column> -->
+
+<!-- <p:column headerText="Father Name" >
+<p:outputLabel value="#{passport.fatherName}"/>
+</p:column> -->
+
+<!-- <p:column headerText="Mother Name">
+<p:outputLabel value="#{passport.motherName}"/>
+</p:column> -->
+<p:column headerText="Email">
+<p:outputLabel value="#{passport.email}"/>
+</p:column>
+
+
+<!-- <p:column headerText="gender" >
+<p:outputLabel value="#{passport.gender}"/>
+</p:column> -->
+
+<p:column headerText="Phone">
+<p:outputLabel value="#{passport.phone}"/>
+</p:column>
+<!-- <p:column headerText="Country">
+<p:outputLabel value="#{passport.countryEntity.country}"/>
+</p:column>
+
+<p:column headerText="Division" >
+<p:outputLabel value="#{passport.divisionEntity.division}"/>
+</p:column>
+
+<p:column headerText="District">
+<p:outputLabel value="#{passport.districtEntity.district}"/>
+</p:column> -->
+<!-- <p:column headerText="Thana">
+<p:outputLabel value="#{passport.thanaEntity.thana}"/>
+</p:column> -->
+
+
+
+<p:column headerText="Product Description">
+<p:outputLabel value="#{passport.productDescription}"/>
+</p:column>
+<p:column headerText="Location Description">
+<p:outputLabel value="#{passport.locationDescription}"/>
+</p:column>
+
+
+
+ <p:column headerText="Details">
+<p:commandButton value="Details" oncomplete="PF('detailsDg').show()" icon="fa-fa-search" action="#{gdController.findGdByID}" update="GdFrom">
+<f:setPropertyActionListener value="#{passport}" target="#{gdController.gdDTO}" />
+ </p:commandButton>
+
+</p:column>
+
+<p:column headerText="Action">
+<p:commandButton value="Seen" icon="fa fa-eye" action="#{gdController.updateSeenStatus}" update="GdFrom" style="#{passport.seenStatus==true?background-color:green}">
+<f:setPropertyActionListener value="#{passport}" target="#{gdController.gdDTO}"/>
+</p:commandButton>
+</p:column>
+
+
+<p:column headerText="Seen Status">
+<p:outputLabel value="#{passport.seenStatus==true?'Viewed':'Not Viewed'}"/>
+</p:column>
+
+
+
+</p:dataTable>
+
+</h:form>
+
+<h:form id="dgFrm">
+
+<p:dialog widgetVar="detailsDg">
+<p:panel>
+<p:panelGrid columns="2">
+<p:outputLabel value="GD ID"/>
+<p:outputLabel value="#{gdController.gdDTO.gdID}"/>
+
+
+<p:outputLabel value="Subject"/>
+<p:outputLabel value="#{gdController.gdDTO.gdSubject}"/>
+
+
+<p:outputLabel value="NID"/>
+<p:outputLabel value="#{gdController.gdDTO.nidNumber}"/>
+
+<p:outputLabel value="User Name"/>
+<p:outputLabel value="#{gdController.gdDTO.userName}"/>
+
+<p:outputLabel value="Father Name"/>
+<p:outputLabel value="#{gdController.gdDTO.fatherName}"/>
+
+<p:outputLabel value="Mother Name"/>
+<p:outputLabel value="#{gdController.gdDTO.motherName}"/>
+
+<p:outputLabel value="email"/>
+<p:outputLabel value="#{gdController.gdDTO.email}"/>
+
+<p:outputLabel value="gender"/>
+<p:outputLabel value="#{gdController.gdDTO.gender}"/>
+
+<p:outputLabel value="phone"/>
+<p:outputLabel value="#{gdController.gdDTO.phone}"/>
+
+
+</p:panelGrid>
+<center>
+<p:commandButton value="OK" icon="fa fa-check" oncomplete="PF('detailsDg').hide()"/>
+</center>
+</p:panel>
+
+</p:dialog>
+
+</h:form>
+
+
+
+</h:body> 
+</ui:define>       
+</ui:composition>

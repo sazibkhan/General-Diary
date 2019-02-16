@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      template="/template/template.xhtml">
+      
+      
+<ui:define name="content">   
+<h:body>
+
+<p:panel>
+<center><h2 style="color: red">Welcome To Category Form</h2></center>
+</p:panel>
+<h:form id="catagoryFrom">
+
+<!-- <p:growl/> -->
+<center>
+<p:panel>
+<p:panelGrid columns="2">
+
+<p:outputLabel value="GD Category Name"/>
+<p:inputText value="#{gdCategoryController.categotyDTO.categoryName}"/>
+        
+</p:panelGrid>
+ <p:commandButton value="Save" ajax="false" icon="fa fa-save" action="#{gdCategoryController.saveOrUpdateCategory}" update="catagoryFrom"/> 
+</p:panel>
+
+<p:dataTable value="#{gdCategoryController.categotyDTOList}" var="categoryType">
+
+<p:column headerText="Category ID" >
+<p:outputLabel value="categoryType.categoryID"/>
+</p:column>
+
+<p:column headerText="Category Name" filterBy="categoryName">
+<p:outputLabel value="#{categoryType.categoryName}"/>
+</p:column>
+
+
+<p:column headerText="Action">
+
+</p:column>
+
+</p:dataTable>
+
+
+
+
+</center>
+</h:form>
+</h:body> 
+</ui:define>       
+</ui:composition>

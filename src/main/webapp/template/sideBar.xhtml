@@ -1,0 +1,44 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <p:menu toggleable="true">
+   
+    	<p:submenu label="GD Form" >
+   				   <p:menuitem value="GD From" url="gdFrom.xhtml"/>           		
+    	</p:submenu>
+    				
+    	<p:submenu label="User Profile">
+       		 <p:menuitem value="User Profile" url="userProfile.xhtml"/>
+   		 </p:submenu>
+    				
+    				
+    	<p:submenu label="Admin" rendered="#{applicationUtilsMB.userRoleAsAdmin}">
+    		 			<p:menuitem value="Role Maintain" url="role-maintain.xhtml"/>
+   		
+   		</p:submenu>
+    
+    
+    	 <p:submenu label="Adminstration OC" rendered="#{applicationUtilsMB.userRoleOc || applicationUtilsMB.userRoleAsAdmin}">
+	 		   <p:menuitem value="GDTable" url="gdTable.xhtml"/> 
+	 		   <p:menuitem value="Pending List" url="oc_role-maintain.xhtml"/> 
+          </p:submenu>
+
+                        
+    <p:submenu label="Addtess" rendered="#{applicationUtilsMB.userRoleAsAdmin}">
+    			<p:menuitem  value="GD Category" url="gdCategory.xhtml"/>
+	            <p:menuitem value="Country" url="country.xhtml"/>  
+	            <p:menuitem value="Division" url="division.xhtml"/>  
+	            <p:menuitem value="District" url="district.xhtml"/> 
+	            <p:menuitem value="Thana" url="thana.xhtml"/> 
+	                       
+     </p:submenu>
+                        
+                        
+    				
+                  
+    </p:menu>
+    
+</ui:composition>
